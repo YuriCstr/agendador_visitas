@@ -9,6 +9,7 @@ class RotaController extends GetxController {
   final rotaList = <Rota>[].obs;
   final clientesSelecionados = <Cliente>[].obs;
   final rota = Rota().obs;
+  RxBool loading = false.obs;
   DateTime? dateTime;
 
   bool validateRota() {
@@ -25,13 +26,16 @@ class RotaController extends GetxController {
   }
 
   void createRota() async {
+    loading.value = true;
     DatabaseHelper.instance.addRota(
       Rota(nome: "#", dataPrevista: dateTime),
     );
     for (var cliente in clientesSelecionados) {
       await DatabaseHelper.instance.addReferences(cliente);
     }
+    DatabaseHelper.instance.getRotas();
     Get.back();
+    loading.value = false;
     showSnackBar("Sucesso", "Rota criada com sucesso", Colors.green);
   }
 

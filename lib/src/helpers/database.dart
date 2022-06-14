@@ -117,6 +117,7 @@ class DatabaseHelper {
     List<Tag> tagList =
         tags.isNotEmpty ? tags.map((t) => Tag.fromMap(t)).toList() : [];
     controller.tags.value = tagList;
+    if (tagList.isEmpty) controller.createTags();
     return tagList;
   }
 

@@ -1,6 +1,5 @@
 import 'package:agendador_visitas/src/controller/cliente_controller.dart';
 import 'package:agendador_visitas/src/helpers/database.dart';
-import 'package:agendador_visitas/src/model/cliente.dart';
 import 'package:agendador_visitas/src/ui/widgets/clientes_widget.dart';
 import 'package:agendador_visitas/src/ui/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,28 +11,26 @@ class ClientesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DatabaseHelper.instance.getClientes();
     return Scaffold(
-      body: FutureBuilder<List<Cliente>>(
-        future: DatabaseHelper.instance.getClientes(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: LoadingWidget());
-          }
-          return snapshot.data!.isEmpty
-              ? Center(
-                  child: Text(
-                    "Você não possui nenhum cliente cadastrado",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+      body: Obx(
+        () => controller.loading.value == true
+            ? LoadingWidget()
+            : controller.clientList.isEmpty
+                ? Center(
+                    child: Text(
+                      "Você não possui nenhum cliente cadastrado",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ListView(
+                        children: controller.clientList.map((cliente) {
+                      return ClientesWidget(cliente: cliente);
+                    }).toList()),
                   ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: ListView(
-                      children: controller.clientList.map((cliente) {
-                    return ClientesWidget(cliente: cliente);
-                  }).toList()),
-                );
-        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,

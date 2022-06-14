@@ -35,7 +35,7 @@ class RotasWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Rota ${rota.nome} ${rota.id! + 1000}",
+                  "Rota ${rota.nome}${rota.id! + 1000}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),

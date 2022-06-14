@@ -1,8 +1,6 @@
 import 'package:agendador_visitas/src/controller/cliente_controller.dart';
 import 'package:agendador_visitas/src/controller/rota_controller.dart';
-import 'package:agendador_visitas/src/controller/tag_controller.dart';
 import 'package:agendador_visitas/src/helpers/database.dart';
-import 'package:agendador_visitas/src/model/rota.dart';
 import 'package:agendador_visitas/src/ui/widgets/loading_widget.dart';
 import 'package:agendador_visitas/src/ui/widgets/rotas_widget.dart';
 import 'package:agendador_visitas/src/ui/widgets/snackbar_widget.dart';
@@ -16,37 +14,32 @@ class RotaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DatabaseHelper.instance.getRotas();
+    DatabaseHelper.instance.getClientes();
     return Scaffold(
-      body: FutureBuilder<List<Rota>>(
-        future: DatabaseHelper.instance.getRotas(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: LoadingWidget());
-          }
-          return snapshot.data!.isEmpty
-              ? Center(
-                  child: Text(
-                    "Você não possui nenhuma rota cadastrada",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+      body: Obx(
+        () => controller.loading.value == true
+            ? LoadingWidget()
+            : controller.rotaList.isEmpty
+                ? Center(
+                    child: Text(
+                      "Você não possui nenhuma rota cadastrada",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ListView(
+                        children: controller.rotaList.map((rota) {
+                      return RotasWidget(rota: rota);
+                    }).toList()),
                   ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: ListView(
-                      children: snapshot.data!.map((rota) {
-                    return RotasWidget(rota: rota);
-                  }).toList()),
-                );
-        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
         onPressed: () {
           DatabaseHelper.instance.getTags();
-          final tagCon = Get.put(TagController());
-          if (tagCon.tags.length == 0) {
-            tagCon.createTags();
-          }
           controller.clearController();
           clienteController.clientList.isEmpty
               ? showSnackBar(

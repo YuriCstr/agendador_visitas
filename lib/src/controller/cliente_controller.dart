@@ -26,6 +26,7 @@ class ClienteController extends GetxController {
       loading.value = false;
       return;
     } else {
+      loading.value = true;
       DatabaseHelper.instance.addCliente(Cliente(
           codigo: int.parse(ctrlCodigo.text),
           nome: ctrlNome.text,
@@ -37,9 +38,9 @@ class ClienteController extends GetxController {
           uf: ctrlEstado.text,
           telefone: int.parse(ctrlTelefone.text),
           isSelect: false));
-
-      loading.value = false;
       Get.back();
+      DatabaseHelper.instance.getClientes();
+      loading.value = false;
       showSnackBar("Sucesso", "Sucesso ao criar um cliente", Colors.green);
     }
   }

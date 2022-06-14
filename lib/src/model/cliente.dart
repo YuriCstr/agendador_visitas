@@ -56,6 +56,6 @@ class Cliente {
         "uf": uf,
         "telefone": telefone,
         "status": status,
-        "isSelect": isSelect,
+        "isSelect": isSelect ? 1 : 0,
       };
 }

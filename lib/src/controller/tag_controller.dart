@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class TagController extends GetxController {
   final tags = <Tag>[].obs;
+  RxBool loading = false.obs;
 
   void createTags() async {
     var tagList = <Tag>[
