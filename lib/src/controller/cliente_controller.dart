@@ -30,7 +30,7 @@ class ClienteController extends GetxController {
       DatabaseHelper.instance.addCliente(Cliente(
           codigo: int.parse(ctrlCodigo.text),
           nome: ctrlNome.text,
-          cpfCnpj: int.parse(ctrlCpfCnpj.text),
+          cpfCnpj: ctrlCpfCnpj.text,
           logradouro: ctrlLogradouro.text,
           numero: ctrlNumero.text,
           cep: int.parse(ctrlCEP.text.replaceAll("-", "")),

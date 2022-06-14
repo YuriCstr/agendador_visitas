@@ -1,7 +1,6 @@
 import 'package:agendador_visitas/src/controller/tag_controller.dart';
 import 'package:agendador_visitas/src/helpers/database.dart';
 import 'package:agendador_visitas/src/model/rota.dart';
-import 'package:agendador_visitas/src/ui/widgets/snackbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

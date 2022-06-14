@@ -5,7 +5,7 @@ class Cliente {
   int? id;
   int codigo;
   String nome;
-  int cpfCnpj;
+  String cpfCnpj;
   String logradouro;
   String numero;
   int cep;
@@ -33,7 +33,7 @@ class Cliente {
         id: json["id"],
         codigo: json["codigo"],
         nome: json["nome"],
-        cpfCnpj: int.parse(json["cpfCnpj"]),
+        cpfCnpj: json["cpfCnpj"],
         logradouro: json["logradouro"],
         numero: json["numero"],
         cep: int.parse(json["cep"]),

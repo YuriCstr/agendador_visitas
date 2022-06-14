@@ -40,7 +40,7 @@ class ClientesWidget extends StatelessWidget {
                 Text("${cliente.telefone}", style: TextStyle(fontSize: 14)),
                 SizedBox(height: 2),
                 Text(
-                    "${cliente.logradouro} nº ${cliente.numero} ${cliente.cep}",
+                    "${cliente.logradouro}, nº ${cliente.numero} - ${cliente.cep}",
                     style: TextStyle(fontSize: 14),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis),

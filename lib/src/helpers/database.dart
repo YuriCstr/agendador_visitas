@@ -4,7 +4,6 @@ import 'package:agendador_visitas/src/controller/tag_controller.dart';
 import 'package:agendador_visitas/src/model/cliente.dart';
 import 'package:agendador_visitas/src/model/rota.dart';
 import 'package:agendador_visitas/src/model/tag.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
