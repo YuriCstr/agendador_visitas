@@ -33,7 +33,6 @@ class StatusWidget extends StatelessWidget {
         DatabaseHelper.instance.getDetailRota(rota);
         Get.back();
         controller.loading.value = false;
-        showSnackBar("Sucesso", titulo, color);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),

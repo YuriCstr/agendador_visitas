@@ -124,11 +124,14 @@ class DetalhesRotaPage extends StatelessWidget {
                                                 return AlertDialog(
                                                   title: Text(
                                                       "Uma tag ja foi selecionada"),
+                                                  content: Text(
+                                                      "Status atual: " +
+                                                          status!),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
                                                           Get.back(),
-                                                      child: Text("Cancelar"),
+                                                      child: Text("Voltar"),
                                                     ),
                                                   ],
                                                 );
