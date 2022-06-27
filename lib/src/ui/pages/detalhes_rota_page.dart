@@ -66,79 +66,71 @@ class DetalhesRotaPage extends StatelessWidget {
                             break;
                         }
                         return Card(
-                          child: Row(
+                          child: Column(
                             children: [
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: ListTile(
-                                    title: Text(
-                                      "${controller.rota.value.clientesDaRota![index].nome} ${controller.rota.value.clientesDaRota![index].telefone}",
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    subtitle: Text(
-                                      "${controller.rota.value.clientesDaRota![index].logradouro}, ${controller.rota.value.clientesDaRota![index].numero}, ${controller.rota.value.clientesDaRota![index].cep}, ${controller.rota.value.clientesDaRota![index].uf}",
-                                      maxLines: 4,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      controller
-                                                  .rota
-                                                  .value
-                                                  .clientesDaRota![index]
-                                                  .status ==
-                                              1
-                                          ? showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      "Selecione uma tag para o cliente"),
-                                                  content: StatusWidget(
-                                                    clienteId: controller
-                                                        .rota
-                                                        .value
-                                                        .clientesDaRota![index]
-                                                        .id!,
-                                                    rota: controller.rota.value,
-                                                  ),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Get.back(),
-                                                      child: Text("Cancelar"),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            )
-                                          : showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      "Uma tag ja foi selecionada"),
-                                                  content: Text(
-                                                      "Status atual: " +
-                                                          status!),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Get.back(),
-                                                      child: Text("Voltar"),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                    },
+                              Container(
+                                margin: EdgeInsets.all(5),
+                                child: ListTile(
+                                  title: Text(
+                                    "${controller.rota.value.clientesDaRota![index].nome} ${controller.rota.value.clientesDaRota![index].telefone}",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w500),
                                   ),
+                                  subtitle: Text(
+                                    "${controller.rota.value.clientesDaRota![index].logradouro}, ${controller.rota.value.clientesDaRota![index].numero}, ${controller.rota.value.clientesDaRota![index].cep}, ${controller.rota.value.clientesDaRota![index].uf}",
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    controller.rota.value.clientesDaRota![index]
+                                                .status ==
+                                            1
+                                        ? showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    "Selecione uma tag para o cliente"),
+                                                content: StatusWidget(
+                                                  clienteId: controller
+                                                      .rota
+                                                      .value
+                                                      .clientesDaRota![index]
+                                                      .id!,
+                                                  rota: controller.rota.value,
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () => Get.back(),
+                                                    child: Text("Cancelar"),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          )
+                                        : showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    "Uma tag ja foi selecionada"),
+                                                content: Text(
+                                                    "Status atual: " + status!),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () => Get.back(),
+                                                    child: Text("Voltar"),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                  },
                                 ),
                               ),
                               status == "Pendente"
